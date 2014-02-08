@@ -27,6 +27,7 @@ goog.require('ol.style.Circle');
 
 
 goog.require('ga.Tooltip');
+goog.require('ga.i18n')
 
 
 /**
@@ -216,7 +217,7 @@ ga.Map.prototype.getFeature_ = function(layerId, featureId) {
 
 ga.Map.prototype.createGeocoderDialog_ = function() {
   this.geocoderDialog_ = new goog.ui.Dialog('geocoder-dialog');
-  this.geocoderDialog_.setTitle('geocoding_results');
+  this.geocoderDialog_.setTitle(goog.getMsg('Geocoding results'));
   this.geocoderDialog_.setModal(true);
   this.geocoderDialog_.setButtonSet(null);
 };
