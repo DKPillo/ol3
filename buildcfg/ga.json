@@ -25,5 +25,7 @@
     "../externs/ga.js"
   ],
 
-  "inherits": "ol.json"
+  "inherits": "ol.json",
+
+  "mode": "ADVANCED"
 }

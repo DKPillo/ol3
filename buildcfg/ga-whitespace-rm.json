@@ -1,0 +1,7 @@
+{
+  "id": "ga-whitespace-rm",
+  "inherits": "ga-whitespace.json",
+  "define": {
+    "ga.lang": "rm"
+  }
+}

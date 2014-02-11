@@ -32,7 +32,8 @@
     "../build/src/internal/src/types.js"
   ],
 
-  "mode": "WHITESPACE",
+  //"mode": "WHITESPACE",
+  "mode": "SIMPLE",
 
   "output-wrapper": [
     "var CLOSURE_NO_DEPS = true;\n",

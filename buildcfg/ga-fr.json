@@ -1,0 +1,8 @@
+{
+  "id": "ga-fr",
+  "inherits": "ga.json",
+  "define": {
+    "goog.LOCALE": 'fr',
+    "ga.lang": "fr"
+  }
+}

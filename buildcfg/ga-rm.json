@@ -1,0 +1,8 @@
+{
+  "id": "ga-rm",
+  "inherits": "ga.json",
+  "define": {
+    "goog.LOCALE": 'rm',
+    "ga.lang": "rm"
+  }
+}

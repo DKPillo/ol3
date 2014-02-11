@@ -4,6 +4,8 @@ from build import *
 
 from pake import targets,TargetCollection, DuplicateTargetError
 
+AVAILABLE_LANGS = ['en', 'de', 'fr', 'it', 'rm']
+
 def prepend(name, template):
      f = open(name,'r')
      temp = f.read()
@@ -38,7 +40,14 @@ targets.add = MethodType(add, targets, TargetCollection)
 
 # We redefine 'build'
 virtual('build', 'build/ga.css', 'build/src/internal/src/requireallga.js', 'build/ga.js',
-        'build/ga-whitespace.js','build/layersConfig')
+        'build/ga-whitespace.js','build/layersConfig', 'build/proj')
+
+# Localized build
+virtual('build/ga-whitespace.js', 'build/ga-whitespace-en.js', 'build/ga-whitespace-de.js', 
+       'build/ga-whitespace-fr.js', 'build/ga-whitespace-it.js', 'build/ga-whitespace-rm.js')
+
+virtual('build/ga.js', 'build/proj', 'build/ga-en.js', 'build/ga-de.js', 'build/ga-fr.js', 
+       'build/ga-it.js',  'build/ga-rm.js')
 
 # We redifine 'apidoc'
 JSDOC = 'node_modules/.bin/jsdoc'
@@ -80,24 +89,82 @@ def build_ga_css(t):
     t.cp('css/editortoolbar.png','build')
     t.touch()
 
-@target('build/ga.js', PLOVR_JAR, SRC, EXTERNAL_SRC, SHADER_SRC,
-        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga.json')
-def build_ga_js(t):
-    t.output('%(JAVA)s', '-jar', PLOVR_JAR, 'build', 'buildcfg/ga.json')
+@target('build/proj')
+def build_proj(t):
     t.cp('resources/EPSG21781.js','build')
     t.cp('resources/EPSG2056.js','build')
     t.cp('resources/proj4js-compressed.js','build')
+
+@target('build/ga-en.js', PLOVR_JAR, SRC, EXTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga-en.json')
+def build_ga_en_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR, 'build', 'buildcfg/ga-en.json')
+    report_sizes(t) 
+
+@target('build/ga-de.js', PLOVR_JAR, SRC, EXTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga-de.json')
+def build_ga_de_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR, 'build', 'buildcfg/ga-de.json')
+    report_sizes(t) 
+
+@target('build/ga-fr.js', PLOVR_JAR, SRC, EXTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga-fr.json')
+def build_ga_fr_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR, 'build', 'buildcfg/ga-fr.json')
+    report_sizes(t) 
+
+@target('build/ga-it.js', PLOVR_JAR, SRC, EXTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga-it.json')
+def build_ga_it_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR, 'build', 'buildcfg/ga-it.json')
+    report_sizes(t) 
+
+@target('build/ga-rm.js', PLOVR_JAR, SRC, EXTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga-rm.json')
+def build_ga_rm_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR, 'build', 'buildcfg/ga-rm.json')
+    report_sizes(t) 
+
+@target('build/ga-whitespace-en.js', PLOVR_JAR, SRC, INTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga.json',
+        'buildcfg/ga-whitespace-en.json')
+def build_ga_whitespace_en_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR,
+             'build', 'buildcfg/ga-whitespace-en.json')
     report_sizes(t)
 
-@target('build/ga-whitespace.js', PLOVR_JAR, SRC, INTERNAL_SRC, SHADER_SRC,
+@target('build/ga-whitespace-de.js', PLOVR_JAR, SRC, INTERNAL_SRC, SHADER_SRC,
         LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga.json',
-        'buildcfg/ga-whitespace.json')
-def build_ga_whitespace_js(t):
+        'buildcfg/ga-whitespace-de.json')
+def build_ga_whitespace_de_js(t):
     t.output('%(JAVA)s', '-jar', PLOVR_JAR,
-             'build', 'buildcfg/ga-whitespace.json')
+             'build', 'buildcfg/ga-whitespace-de.json')
     report_sizes(t)
     
-@target('build/layersconfig', AVAILABLE_LANGS)
+@target('build/ga-whitespace-fr.js', PLOVR_JAR, SRC, INTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga.json',
+        'buildcfg/ga-whitespace-fr.json')
+def build_ga_whitespace_fr_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR,
+             'build', 'buildcfg/ga-whitespace-fr.json')
+    report_sizes(t)
+
+@target('build/ga-whitespace-it.js', PLOVR_JAR, SRC, INTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC, 'buildcfg/base.json', 'buildcfg/ga.json',
+        'buildcfg/ga-whitespace-it.json')
+def build_ga_whitespace_it_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR,
+             'build', 'buildcfg/ga-whitespace-it.json')
+    report_sizes(t)
+
+@target('build/ga-whitespace-rm.js', PLOVR_JAR, SRC, INTERNAL_SRC, SHADER_SRC,
+        LIBTESS_JS_SRC,  'buildcfg/ga-whitespace-rm.json')
+def build_ga_whitespace_rm_js(t):
+    t.output('%(JAVA)s', '-jar', PLOVR_JAR,
+             'build', 'buildcfg/ga-whitespace-rm.json')
+    report_sizes(t)
+
+@target('build/layersConfig', AVAILABLE_LANGS)
 def get_layersconfig(t):
     for lang in AVAILABLE_LANGS:
         name = "%s.%s.js" % (t.name, lang)

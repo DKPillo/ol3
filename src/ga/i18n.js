@@ -1,21 +1,16 @@
 goog.provide('ga.i18n');
-goog.provide('ga.i18n.msg.en_UK');
-goog.provide('ga.i18n.msg.de_CH');
+goog.require('ga.i18n.msg.de');
+goog.require('ga.i18n.msg.en');
+goog.require('ga.i18n.msg.fr');
+goog.require('ga.i18n.msg.it');
+goog.require('ga.i18n.msg.rm');
+
 
 /**
- * Message catalog in english.
- * @type {Object.<string,string>}
+ * @define {string} lang application language
  */
-ga.i18n.msg.en_UK = {};
+ga.lang = 'de';
 
-/**
- * Message catalog in japanese.
- * @type {Object.<string,string>}
- */
-ga.i18n.msg.de_CH = {
-  // Tab labels.
-  'Geocoding results':    'Geokodierung Ergebnisse'
-};
 
 /**
  * Message catalog in the current language.
@@ -23,11 +18,21 @@ ga.i18n.msg.de_CH = {
  */
 ga.i18n.msg.current;
 
-if(goog.LOCALE == 'de' || true) {
-  ga.i18n.msg.current = ga.i18n.msg.de_CH;
+
+if (ga.lang && ga.lang == 'en') {
+  ga.i18n.msg.current = ga.i18n.msg.en;
+} else if (ga.lang && ga.lang == 'de') {
+  ga.i18n.msg.current = ga.i18n.msg.de;
+} else if (ga.lang && ga.lang == 'fr') {
+  ga.i18n.msg.current = ga.i18n.msg.fr;
+} else if (ga.lang && ga.lang == 'it') {
+  ga.i18n.msg.current = ga.i18n.msg.it;
+} else if (ga.lang && ga.lang == 'rm') {
+  ga.i18n.msg.current = ga.i18n.msg.rm;
 } else {
-  ga.i18n.msg.current = ga.i18n.msg.en_UK;
+  ga.i18n.msg.current = ga.i18n.msg.de;
 }
+
 
 /**
  * Implementation of goog.getMsg for use with localized messages.
@@ -35,7 +40,7 @@ if(goog.LOCALE == 'de' || true) {
  * @param {Object=} opt_values Map of place holder name to value.
  * @return {string} message with placeholders filled.
  */
-goog.getMsg = function(str, opt_values) {
+ga.i18n.getMsg = function(str, opt_values) {
   str = ga.i18n.msg.current[str] || str;
   var values = opt_values || {};
   for (var key in values) {

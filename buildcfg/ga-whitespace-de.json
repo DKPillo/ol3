@@ -1,0 +1,8 @@
+{
+  "id": "ga-whitespace-de",
+  "inherits": "ga-whitespace.json",
+  "define": {
+    "goog.LOCALE": "de",
+    "ga.lang": "de"
+  }
+}
