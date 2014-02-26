@@ -27,6 +27,7 @@ goog.require('ol.style.Circle');
 
 
 goog.require('ga.Tooltip');
+goog.require('ga.Lang');
 
 
 /**
@@ -110,7 +111,9 @@ ga.Map.prototype.geocode = function(text) {
   var jsonp = new goog.net.Jsonp(
     '//api3.geo.admin.ch/rest/services/api/SearchServer');
   var payload = { 'searchText': text,
-                  'type': 'locations' };
+                  'type': 'locations',
+                  'returnGeometry': false
+  };
   jsonp.send(payload, 
              goog.bind(this.handleGeocode_, this), 
              goog.bind(this.handleGeocodeError_, this));
@@ -216,7 +219,7 @@ ga.Map.prototype.getFeature_ = function(layerId, featureId) {
 
 ga.Map.prototype.createGeocoderDialog_ = function() {
   this.geocoderDialog_ = new goog.ui.Dialog('geocoder-dialog');
-  this.geocoderDialog_.setTitle('geocoding_results');
+  this.geocoderDialog_.setTitle(ga.Lang.translate('Geocoding results'));
   this.geocoderDialog_.setModal(true);
   this.geocoderDialog_.setButtonSet(null);
 };
