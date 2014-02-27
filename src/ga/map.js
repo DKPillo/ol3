@@ -112,7 +112,7 @@ ga.Map.prototype.geocode = function(text) {
     '//api3.geo.admin.ch/rest/services/api/SearchServer');
   var payload = { 'searchText': text,
                   'type': 'locations',
-                  'returnGeometry': false
+                  'returnGeometry': true
   };
   jsonp.send(payload, 
              goog.bind(this.handleGeocode_, this), 
