@@ -1,5 +1,7 @@
 goog.provide('ga.Map');
 
+goog.require('ga.apiUrl');
+
 goog.require('goog.asserts');
 goog.require('goog.net.Jsonp');
 goog.require('goog.events');
@@ -104,12 +106,12 @@ ga.Map = function(options) {
 goog.inherits(ga.Map, ol.Map);
 
 /**
- * Geocode using api.geo.admin.ch
+ * Geocode using api3.geo.admin.ch
  * @param {String} text text to geocode.
  */
 ga.Map.prototype.geocode = function(text) {
   var jsonp = new goog.net.Jsonp(
-    '//api3.geo.admin.ch/rest/services/api/SearchServer');
+    ga.apiUrl + '/rest/services/api/SearchServer');
   var payload = { 'searchText': text,
                   'type': 'locations',
                   'returnGeometry': false
@@ -136,13 +138,13 @@ ga.Map.prototype.handleGeocodeError_ = function(response) {
 };
 
 /**
- * Recenter feature using api.geo.admin.ch
+ * Recenter feature using api3.geo.admin.ch
  * @param {String} layerId GeoAdmin id of the layer.
  * @param {String} featureId id of the feature.
  */
 ga.Map.prototype.recenterFeature = function(layerId, featureId) {
   var jsonp = new goog.net.Jsonp(
-    '//api3.geo.admin.ch/rest/services/api/MapServer/' +
+    ga.apiUrl + '/rest/services/api/MapServer/' +
     layerId + '/' + featureId);
   var payload = { 'geometryFormat': 'geojson' };
   jsonp.send(payload, 
@@ -168,13 +170,13 @@ ga.Map.prototype.recenterToFeature_ = function(feature) {
 };
 
 /**
- * Highlight feature using api.geo.admin.ch
+ * Highlight feature using api3.geo.admin.ch
  * @param {String} layerId GeoAdmin id of the layer.
  * @param {String} featureId id of the feature.
  */
 ga.Map.prototype.highlightFeature = function(layerId, featureId) {
   var jsonp = new goog.net.Jsonp(
-    '//api3.geo.admin.ch/rest/services/api/MapServer/' +
+    ga.apiUrl + '/rest/services/api/MapServer/' +
     layerId + '/' + featureId);
   var payload = { 'geometryFormat': 'geojson' };
   jsonp.send(payload, 

@@ -1,4 +1,4 @@
-This license completes the OpenLayers License for the api.geo.admin.ch specific parts 
+This license completes the OpenLayers License for the api3.geo.admin.ch specific parts 
 of the code.
 
 Redistribution and use in source and binary forms, with or without modification,

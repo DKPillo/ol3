@@ -1,5 +1,7 @@
 goog.provide('ga.Tooltip');
 
+goog.require('ga.apiUrl');
+
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
 goog.require('goog.net.Jsonp');
@@ -128,7 +130,7 @@ ga.Tooltip.prototype.handleClick_ = function(mapBrowserEvent) {
   var size = this.map_.getSize();
   var extent = this.map_.getView().getView2D().calculateExtent(size);
   var jsonp = new goog.net.Jsonp(
-    new goog.Uri('//api3.geo.admin.ch/rest/services/api/MapServer/identify'),
+    new goog.Uri(ga.apiUrl + '/rest/services/api/MapServer/identify'),
       'callback');
   var layerList = new Array();
   var layer;
@@ -195,7 +197,7 @@ ga.Tooltip.prototype.handleIdentifyResponse_ = function(response) {
   for (var i in response['results']) {
     var lang = window.GeoAdmin && window.GeoAdmin.lang ? window.GeoAdmin.lang : "de";
     var jsonp = new goog.net.Jsonp(
-      new goog.Uri('//api3.geo.admin.ch/rest/services/api/MapServer/' +
+      new goog.Uri(ga.apiUrl + '/rest/services/api/MapServer/' +
         response['results'][i]['layerBodId'] + '/' +
         response['results'][i]['featureId'] + '/' +
         '/htmlPopup?lang=' + lang),
