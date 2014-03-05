@@ -14,7 +14,7 @@ goog.require('ga.Lang.msg.rm');
 /**
  * @type {string}
  */
-ga.Lang.code_ = 'de';
+ga.Lang.code_ = getDefaultLang() || 'de';
 
 
 /**
