@@ -105,7 +105,9 @@ def get_layersconfig(t):
         t.download('http://api3.geo.admin.ch/rest/services/api/MapServer/layersconfig?lang=%s' % lang)
         os.rename(t.name, name)
         t.info('downloaded %r', name)
-        prepend(name, """function getConfig(){ return %s } """)
+        #prepend(name, """function getConfig(){ return %s } """)
+
+        prepend(name, """function getDefaultLang(){return '""" + lang + """'}; function getConfig(){ return %s };""")
         
 @target('serve', PLOVR_JAR, 'test-deps', 'examples')
 def serve(t):
