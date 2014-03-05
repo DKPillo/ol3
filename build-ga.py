@@ -38,7 +38,7 @@ targets.add = MethodType(add, targets, TargetCollection)
 
 # We redefine 'build'
 virtual('build', 'build/ga.css', 'build/src/internal/src/requireallga.js', 'build/ga.js',
-        'build/ga-whitespace.js','build/layersConfig')
+        'build/ga-whitespace.js','build/layersconfig')
 
 # We redifine 'apidoc'
 JSDOC = 'node_modules/.bin/jsdoc'
@@ -105,7 +105,9 @@ def get_layersconfig(t):
         t.download('http://api3.geo.admin.ch/rest/services/api/MapServer/layersconfig?lang=%s' % lang)
         os.rename(t.name, name)
         t.info('downloaded %r', name)
-        prepend(name, """function getConfig(){ return %s } """)
+        #prepend(name, """function getConfig(){ return %s } """)
+
+        prepend(name, """function getDefaultLang(){return '""" + lang + """'};\nfunction getApiUrl() {return "//api3.geo.admin.ch"};\n function getConfig(){ return %s };""")
         
 @target('serve', PLOVR_JAR, 'test-deps', 'examples')
 def serve(t):
