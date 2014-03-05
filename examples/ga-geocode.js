@@ -3,7 +3,7 @@ goog.require('ga.layer');
 goog.require('ol.View2D');
 
 
-ga.Lang.setCode('de');
+ga.Lang.setCode('en');
 
 // Create a GeoAdmin Map
 var map = new ga.Map({
